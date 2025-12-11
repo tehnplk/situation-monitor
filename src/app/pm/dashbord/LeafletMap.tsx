@@ -24,6 +24,7 @@ type LeafletMapProps = {
 const LeafletMap: React.FC<LeafletMapProps> = ({ stations, source, onSourceChange, loading }) => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapInstanceRef = useRef<any | null>(null);
+  const markersRef = useRef<any[]>([]);
 
   useEffect(() => {
     if (!mapContainerRef.current) return;
@@ -54,7 +55,17 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ stations, source, onSourceChang
         );
 
         if (existing) {
-          existing.remove();
+          existing.addEventListener(
+            "load",
+            () => resolve(),
+            { once: true },
+          );
+          existing.addEventListener(
+            "error",
+            () => reject(new Error("Leaflet script load failed")),
+            { once: true },
+          );
+          return;
         }
 
         const script = document.createElement("script");
@@ -78,18 +89,26 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ stations, source, onSourceChang
         const L = (window as any).L;
         if (!L) return;
 
-        if (mapInstanceRef.current) {
-          mapInstanceRef.current.remove();
-          mapInstanceRef.current = null;
+        let map = mapInstanceRef.current;
+
+        if (!map) {
+          map = L.map(mapContainerRef.current);
+          mapInstanceRef.current = map;
+
+          L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            maxZoom: 19,
+            attribution: "© OpenStreetMap contributors",
+          }).addTo(map);
         }
 
-        const map = L.map(mapContainerRef.current);
-        mapInstanceRef.current = map;
-
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          maxZoom: 19,
-          attribution: "© OpenStreetMap contributors",
-        }).addTo(map);
+        if (markersRef.current.length > 0) {
+          markersRef.current.forEach((marker) => {
+            try {
+              map.removeLayer(marker);
+            } catch {}
+          });
+          markersRef.current = [];
+        }
 
         stations.forEach((station) => {
           if (typeof station.lat !== "number" || typeof station.lng !== "number") {
@@ -112,6 +131,8 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ stations, source, onSourceChang
             fillOpacity: 0.85,
             weight: 2,
           }).addTo(map);
+
+          markersRef.current.push(marker);
 
           const safeName = station.name || "ไม่ทราบชื่อสถานี";
           const safeLevel = station.level || "ไม่ทราบระดับ";
@@ -213,7 +234,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ stations, source, onSourceChang
           </div>
         )}
       </div>
-      <div className="mt-4 h-72 w-full overflow-hidden rounded-xl border border-emerald-200 bg-emerald-50">
+      <div className="mt-4 h-72 w-full overflow-hidden rounded-xl border border-emerald-200 bg-emerald-50 relative">
         <div ref={mapContainerRef} className="h-full w-full" />
         {loading && (
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-emerald-50/40 text-xs font-medium text-emerald-900">
