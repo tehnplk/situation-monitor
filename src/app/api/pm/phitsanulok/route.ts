@@ -1,0 +1,67 @@
+import { NextResponse } from "next/server";
+
+const AIR4THAI_ENDPOINT = "http://air4thai.pcd.go.th/services/getNewAQI_JSON.php";
+
+function levelFromPm25(value: number): string {
+  if (value <= 25) return "ดี";
+  if (value <= 50) return "ปานกลาง";
+  if (value <= 75) return "เริ่มมีผลกระทบ";
+  return "มีผลกระทบต่อสุขภาพ";
+}
+
+export async function GET() {
+  try {
+    const res = await fetch(AIR4THAI_ENDPOINT, {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      return NextResponse.json(
+        { error: "Failed to fetch data from Air4Thai" },
+        { status: 502 },
+      );
+    }
+
+    const raw = (await res.json()) as any;
+    const rawStations: any[] = Array.isArray(raw.stations)
+      ? raw.stations
+      : Array.isArray(raw)
+      ? raw
+      : Array.isArray(raw?.data)
+      ? raw.data
+      : [];
+
+    const stations = rawStations
+      .filter((s) => typeof s?.areaTH === "string" && s.areaTH.includes("พิษณุโลก"))
+      .map((s) => {
+        const pmObj = s?.AQILast?.PM25;
+        const pmRaw = typeof pmObj?.value === "string" ? parseFloat(pmObj.value) : NaN;
+        const pm25 = Number.isFinite(pmRaw) && pmRaw >= 0 ? pmRaw : null;
+        const lat = typeof s?.lat === "string" ? parseFloat(s.lat) : NaN;
+        const lng = typeof s?.long === "string" ? parseFloat(s.long) : NaN;
+
+        return {
+          stationID: s.stationID ?? null,
+          nameTH: s.nameTH ?? null,
+          areaTH: s.areaTH ?? null,
+          lat: Number.isFinite(lat) ? lat : null,
+          lng: Number.isFinite(lng) ? lng : null,
+          pm25,
+          level: pm25 == null ? null : levelFromPm25(pm25),
+          status: "ออนไลน์",
+          lastUpdate:
+            s?.AQILast?.date && s?.AQILast?.time
+              ? `${s.AQILast.date} ${s.AQILast.time}`
+              : null,
+        };
+      })
+      .filter((s) => s.lat != null && s.lng != null && s.pm25 != null);
+
+    return NextResponse.json({ stations });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Unexpected error while fetching Air4Thai data" },
+      { status: 500 },
+    );
+  }
+}
