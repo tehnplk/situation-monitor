@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 
 const AIR4THAI_ENDPOINT = "http://air4thai.pcd.go.th/services/getNewAQI_JSON.php";
 
+// เกณฑ์ช่วงค่า PM2.5 นี้ออกแบบให้สอดคล้องโดยประมาณกับระดับคุณภาพอากาศของไทย
+// ข้อมูลอ้างอิงเพิ่มเติม: ระบบ Air4Thai / กรมควบคุมมลพิษ http://air4thai.pcd.go.th
 function levelFromPm25(value: number): string {
   if (value <= 25) return "ดี";
   if (value <= 50) return "ปานกลาง";
