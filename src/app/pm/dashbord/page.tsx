@@ -1,7 +1,17 @@
-"use client";
+import React, { Suspense } from "react";
+import MapSection from "./MapSection";
 
-import React, { useState } from "react";
-import LeafletMap from "./LeafletMap";
+function MapFallback() {
+  return (
+    <div className="overflow-hidden rounded-2xl border border-emerald-200 bg-white/90 p-5 sm:p-6">
+      <div className="mt-4 h-72 w-full overflow-hidden rounded-xl border border-emerald-200 bg-emerald-50 relative">
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-emerald-50/40 text-xs font-medium text-emerald-900">
+          กำลังโหลดข้อมูลจาก Air4Thai...
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const MOCK_PM_DATA = {
   location: "จังหวัดพิษณุโลก",
@@ -118,9 +128,11 @@ const levelColor = (level: string) => {
   }
 };
 
-export default function PmDashboardPage() {
-  type MapSource = "mock" | "air4thai";
-
+export default async function PmDashboardPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ source?: string | string[] | undefined }>;
+}) {
   type MapStation = {
     name: string;
     pm25: number;
@@ -131,115 +143,13 @@ export default function PmDashboardPage() {
     lastUpdate?: string | null;
   };
 
-  const [mapSource, setMapSource] = useState<MapSource>("mock");
-  const [apiStations, setApiStations] = useState<MapStation[] | null>(null);
-  const [mapLoading, setMapLoading] = useState(false);
-  const [mapError, setMapError] = useState<string | null>(null);
+  type MapSource = "mock" | "air4thai";
 
-  const handleMapSourceChange = (source: MapSource) => {
-    if (source === mapSource) return;
+  const sp = await searchParams;
+  const sourceParam = Array.isArray(sp.source) ? sp.source[0] : sp.source;
+  const requestedSource: MapSource = sourceParam === "air4thai" ? "air4thai" : "mock";
 
-    if (source === "air4thai") {
-      if (apiStations && apiStations.length > 0) {
-        setMapSource("air4thai");
-        return;
-      }
-
-      setMapLoading(true);
-      setMapError(null);
-
-      fetch("/api/pm/thailand")
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error("Failed to fetch Air4Thai data");
-          }
-          return res.json();
-        })
-        .then((data) => {
-          const rawStations: any[] = Array.isArray(data?.stations)
-            ? data.stations
-            : [];
-
-          const mapped: MapStation[] = rawStations
-            .filter((s) => {
-              const lat = typeof s.lat === "number" ? s.lat : NaN;
-              const lng = typeof s.lng === "number" ? s.lng : NaN;
-              const pmRaw =
-                typeof s.pm25 === "number"
-                  ? s.pm25
-                  : typeof s.pm25 === "string"
-                  ? parseFloat(s.pm25)
-                  : NaN;
-
-              return (
-                Number.isFinite(lat) &&
-                Number.isFinite(lng) &&
-                Number.isFinite(pmRaw)
-              );
-            })
-            .map((s) => {
-              const lat = s.lat as number;
-              const lng = s.lng as number;
-              const pmRaw =
-                typeof s.pm25 === "number"
-                  ? s.pm25
-                  : typeof s.pm25 === "string"
-                  ? parseFloat(s.pm25)
-                  : 0;
-
-              const name: string =
-                typeof s.areaTH === "string"
-                  ? s.areaTH
-                  : typeof s.nameTH === "string"
-                  ? s.nameTH
-                  : "ไม่ทราบชื่อสถานี";
-
-              const level: string =
-                typeof s.level === "string" ? s.level : "ปานกลาง";
-
-              const status: string | undefined =
-                typeof s.status === "string" ? s.status : undefined;
-
-              const lastUpdate: string | null | undefined =
-                typeof s.lastUpdate === "string" ? s.lastUpdate : undefined;
-
-              const station: MapStation = {
-                name,
-                pm25: pmRaw,
-                level,
-                lat,
-                lng,
-                status,
-                lastUpdate,
-              };
-
-              return station;
-            });
-
-          if (mapped.length === 0) {
-            throw new Error("No station data for Phitsanulok from Air4Thai");
-          }
-
-          setApiStations(mapped);
-          setMapSource("air4thai");
-        })
-        .catch(() => {
-          setMapError("ไม่สามารถโหลดข้อมูลจาก Air4Thai ได้ กำลังแสดงข้อมูลจำลองแทน");
-          setMapSource("mock");
-        })
-        .finally(() => {
-          setMapLoading(false);
-        });
-    } else {
-      setMapSource("mock");
-      setMapError(null);
-    }
-  };
-
-  const mapStations: MapStation[] =
-    mapSource === "mock"
-      ? (MOCK_PM_DATA.stations as MapStation[])
-      : apiStations ?? ((MOCK_PM_DATA.stations as unknown as MapStation[]));
+  const mapStations = MOCK_PM_DATA.stations as MapStation[];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-emerald-100 to-emerald-200 text-emerald-950">
@@ -270,12 +180,12 @@ export default function PmDashboardPage() {
         <main className="grid gap-6 lg:grid-cols-3">
           {/* Left column */}
           <section className="space-y-6 lg:col-span-2">
-            <LeafletMap
-              stations={mapStations}
-              source={mapSource}
-              onSourceChange={handleMapSourceChange}
-              loading={mapLoading}
-            />
+            <Suspense fallback={<MapFallback />}>
+              <MapSection
+                requestedSource={requestedSource}
+                fallbackStations={mapStations}
+              />
+            </Suspense>
             {/* Current status card */}
             <div className="overflow-hidden rounded-2xl border border-emerald-200 bg-white/90 p-5 shadow-lg shadow-emerald-200/80 sm:p-6">
               <div className="flex flex-wrap items-center justify-between gap-4">

@@ -2,6 +2,73 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
+type LeafletLayer = {
+  addTo: (map: LeafletMapInstance) => LeafletLayer;
+};
+
+type LeafletMarker = LeafletLayer & {
+  bindPopup: (html: string) => void;
+  bindTooltip: (
+    content: string,
+    options: {
+      permanent: boolean;
+      direction: string;
+      offset: [number, number];
+      className: string;
+    },
+  ) => void;
+};
+
+type LeafletTileLayer = LeafletLayer;
+
+type LeafletControlInstance = {
+  addTo: (map: LeafletMapInstance) => void;
+};
+
+type LeafletControlCtor = new (options: { position: string }) => LeafletControlInstance;
+
+type LeafletMapInstance = {
+  remove: () => void;
+  setView: (center: [number, number], zoom: number) => void;
+  fitBounds: (bounds: LeafletLatLngBounds, options: { padding: [number, number] }) => void;
+  hasLayer: (layer: LeafletLayer) => boolean;
+  removeLayer: (layer: LeafletLayer) => void;
+  removeControl: (control: LeafletControlInstance) => void;
+};
+
+type LeafletLatLngBounds = unknown;
+
+type LeafletNamespace = {
+  map: (container: HTMLElement) => LeafletMapInstance;
+  tileLayer: (
+    url: string,
+    options: { maxZoom: number; attribution: string },
+  ) => LeafletTileLayer;
+  circleMarker: (
+    latlng: [number, number],
+    options: {
+      radius: number;
+      color: string;
+      fillColor: string;
+      fillOpacity: number;
+      weight: number;
+    },
+  ) => LeafletMarker;
+  latLngBounds: (points: [number, number][]) => LeafletLatLngBounds;
+  Control: { extend: (definition: { onAdd: () => HTMLElement; onRemove?: () => void }) => LeafletControlCtor };
+  DomUtil: { create: (tagName: string, className: string, container?: HTMLElement) => HTMLElement };
+  DomEvent: {
+    disableClickPropagation: (el: HTMLElement) => void;
+    disableScrollPropagation: (el: HTMLElement) => void;
+    on: (el: HTMLElement, event: string, handler: () => void) => void;
+  };
+};
+
+function getLeaflet(): LeafletNamespace | null {
+  const w = window as unknown as { L?: unknown };
+  return w.L ? (w.L as LeafletNamespace) : null;
+}
+
 type StationForMap = {
   name: string;
   pm25: number;
@@ -25,19 +92,19 @@ type LeafletMapProps = {
 
 const LeafletMap: React.FC<LeafletMapProps> = ({ stations, source, onSourceChange, loading }) => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
-  const mapInstanceRef = useRef<any | null>(null);
-  const markersRef = useRef<any[]>([]);
-  const baseLayersRef = useRef<{ street?: any; satellite?: any; current?: any }>({});
+  const mapInstanceRef = useRef<LeafletMapInstance | null>(null);
+  const markersRef = useRef<LeafletMarker[]>([]);
+  const baseLayersRef = useRef<{ street?: LeafletTileLayer; satellite?: LeafletTileLayer; current?: LeafletTileLayer }>({});
 
   const [baseMap, setBaseMap] = useState<BaseMap>("street");
   const stationsRef = useRef<StationForMap[]>(stations);
   const sourceRef = useRef<DataSource>(source);
   const baseMapRef = useRef<BaseMap>(baseMap);
   const onSourceChangeRef = useRef<LeafletMapProps["onSourceChange"]>(onSourceChange);
-  const sourceControlRef = useRef<any | null>(null);
+  const sourceControlRef = useRef<LeafletControlInstance | null>(null);
   const sourceControlContainerRef = useRef<HTMLElement | null>(null);
   const sourceControlButtonsRef = useRef<{ mock?: HTMLButtonElement; air?: HTMLButtonElement }>({});
-  const basemapControlRef = useRef<any | null>(null);
+  const basemapControlRef = useRef<LeafletControlInstance | null>(null);
   const basemapControlContainerRef = useRef<HTMLElement | null>(null);
   const basemapButtonsRef = useRef<{
     toggle?: HTMLButtonElement;
@@ -80,8 +147,8 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ stations, source, onSourceChang
       (nextSource === "air4thai" ? active : inactive);
   };
 
-  const refreshMarkersAndView = (map: any) => {
-    const L = (window as any).L;
+  const refreshMarkersAndView = (map: LeafletMapInstance) => {
+    const L = getLeaflet();
     if (!L) return;
 
     if (markersRef.current.length > 0) {
@@ -113,7 +180,9 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ stations, source, onSourceChang
         fillColor: color,
         fillOpacity: 0.85,
         weight: 2,
-      }).addTo(map);
+      });
+
+      marker.addTo(map);
 
       markersRef.current.push(marker);
 
@@ -185,8 +254,8 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ stations, source, onSourceChang
       (nextBaseMap === "street" ? active : inactive);
   };
 
-  const applyBaseLayer = (map: any) => {
-    const L = (window as any).L;
+  const applyBaseLayer = (map: LeafletMapInstance) => {
+    const L = getLeaflet();
     if (!L) return;
 
     if (!baseLayersRef.current.street) {
@@ -248,7 +317,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ stations, source, onSourceChang
 
     const ensureLeafletScript = () =>
       new Promise<void>((resolve, reject) => {
-        if ((window as any).L) {
+        if (getLeaflet()) {
           resolve();
           return;
         }
@@ -289,7 +358,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ stations, source, onSourceChang
     ensureLeafletScript()
       .then(() => {
         if (cancelled || !mapContainerRef.current) return;
-        const L = (window as any).L;
+        const L = getLeaflet();
         if (!L) return;
 
         if (!mapInstanceRef.current) {
@@ -396,7 +465,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ stations, source, onSourceChang
                 const container = L.DomUtil.create(
                   "div",
                   "leaflet-control",
-                ) as any as HTMLElement;
+                ) as HTMLElement;
                 container.className =
                   "leaflet-control rounded-xl bg-white/90 backdrop-blur border border-emerald-200 shadow-sm p-1";
 
@@ -486,14 +555,14 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ stations, source, onSourceChang
   }, []);
 
   useEffect(() => {
-    if (!mapInstanceRef.current || !(window as any).L) return;
+    if (!mapInstanceRef.current || !getLeaflet()) return;
     applyBaseLayer(mapInstanceRef.current);
     updateBasemapControlUI(baseMap);
   }, [baseMap]);
 
   useEffect(() => {
     updateSourceControlUI(source);
-    if (!mapInstanceRef.current || !(window as any).L) return;
+    if (!mapInstanceRef.current || !getLeaflet()) return;
     refreshMarkersAndView(mapInstanceRef.current);
   }, [stations, source]);
 
