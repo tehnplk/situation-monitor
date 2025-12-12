@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Province {
+  id     Int    @id
+  nameTh String @map("name_th")
+  nameEn String @map("name_en")
+
+  districts District[]
+
+  @@map("provinces")
+}
+
+model District {
+  id     Int    @id
+  nameTh String @map("name_th")
+  nameEn String @map("name_en")
+
+  provinceId Int      @map("province_id")
+  province   Province @relation(fields: [provinceId], references: [id])
+
+  subDistricts SubDistrict[]
+
+  @@index([provinceId])
+  @@map("districts")
+}
+
+model SubDistrict {
+  id      Int    @id
+  nameTh  String @map("name_th")
+  nameEn  String @map("name_en")
+  zipCode Int    @map("zip_code")
+  lat     Float? @map("lat")
+  long    Float? @map("long")
+
+  districtId Int      @map("district_id")
+  district   District @relation(fields: [districtId], references: [id])
+
+  @@index([districtId])
+  @@index([zipCode])
+  @@map("sub_districts")
+}

@@ -1,0 +1,829 @@
+{
+  "source": {
+    "dataset": "kongvut/thai-province-data",
+    "url": "https://raw.githubusercontent.com/kongvut/thai-province-data/master/api/latest/province_with_district_and_sub_district.json",
+    "fetched_at": "2025-12-12T08:07:35.075Z"
+  },
+  "province": {
+    "id": 52,
+    "name_th": "พิษณุโลก",
+    "name_en": "Phitsanulok"
+  },
+  "districts": [
+    {
+      "id": 6501,
+      "name_th": "เมืองพิษณุโลก",
+      "name_en": "Mueang Phitsanulok",
+      "sub_districts": [
+        {
+          "id": 650101,
+          "name_th": "ในเมือง",
+          "name_en": "Nai Mueang",
+          "zip_code": 65000,
+          "lat": 16.815,
+          "long": 100.26
+        },
+        {
+          "id": 650102,
+          "name_th": "วังน้ำคู้",
+          "name_en": "Wang Nam Khu",
+          "zip_code": 65230,
+          "lat": 16.652,
+          "long": 100.269
+        },
+        {
+          "id": 650103,
+          "name_th": "วัดจันทร์",
+          "name_en": "Wat Chan",
+          "zip_code": 65000,
+          "lat": 16.789,
+          "long": 100.25
+        },
+        {
+          "id": 650104,
+          "name_th": "วัดพริก",
+          "name_en": "Wat Phrik",
+          "zip_code": 65230,
+          "lat": 16.715,
+          "long": 100.243
+        },
+        {
+          "id": 650105,
+          "name_th": "ท่าทอง",
+          "name_en": "Tha Thong",
+          "zip_code": 65000,
+          "lat": 16.798,
+          "long": 100.197
+        },
+        {
+          "id": 650106,
+          "name_th": "ท่าโพธิ์",
+          "name_en": "Tha Pho",
+          "zip_code": 65000,
+          "lat": 16.758,
+          "long": 100.195
+        },
+        {
+          "id": 650107,
+          "name_th": "สมอแข",
+          "name_en": "Samo Khae",
+          "zip_code": 65000,
+          "lat": 16.823,
+          "long": 100.325
+        },
+        {
+          "id": 650108,
+          "name_th": "ดอนทอง",
+          "name_en": "Don Thong",
+          "zip_code": 65000,
+          "lat": 16.884,
+          "long": 100.392
+        },
+        {
+          "id": 650109,
+          "name_th": "บ้านป่า",
+          "name_en": "Ban Pa",
+          "zip_code": 65000,
+          "lat": 16.926,
+          "long": 100.368
+        },
+        {
+          "id": 650110,
+          "name_th": "ปากโทก",
+          "name_en": "Pak Thok",
+          "zip_code": 65000,
+          "lat": 16.905,
+          "long": 100.259
+        },
+        {
+          "id": 650111,
+          "name_th": "หัวรอ",
+          "name_en": "Hua Ro",
+          "zip_code": 65000,
+          "lat": 16.875,
+          "long": 100.274
+        },
+        {
+          "id": 650112,
+          "name_th": "จอมทอง",
+          "name_en": "Chom Thong",
+          "zip_code": 65000,
+          "lat": 16.902,
+          "long": 100.215
+        },
+        {
+          "id": 650113,
+          "name_th": "บ้านกร่าง",
+          "name_en": "Ban Krang",
+          "zip_code": 65000,
+          "lat": 16.855,
+          "long": 100.184
+        },
+        {
+          "id": 650114,
+          "name_th": "บ้านคลอง",
+          "name_en": "Ban Khlong",
+          "zip_code": 65000,
+          "lat": 16.83,
+          "long": 100.239
+        },
+        {
+          "id": 650115,
+          "name_th": "พลายชุมพล",
+          "name_en": "Phlai Chumphon",
+          "zip_code": 65000,
+          "lat": 16.854,
+          "long": 100.226
+        },
+        {
+          "id": 650116,
+          "name_th": "มะขามสูง",
+          "name_en": "Makham Sung",
+          "zip_code": 65000,
+          "lat": 16.929,
+          "long": 100.256
+        },
+        {
+          "id": 650117,
+          "name_th": "อรัญญิก",
+          "name_en": "Aranyik",
+          "zip_code": 65000,
+          "lat": 16.8,
+          "long": 100.288
+        },
+        {
+          "id": 650118,
+          "name_th": "บึงพระ",
+          "name_en": "Bueng Phra",
+          "zip_code": 65000,
+          "lat": 16.749,
+          "long": 100.273
+        },
+        {
+          "id": 650119,
+          "name_th": "ไผ่ขอดอน",
+          "name_en": "Phai Kho Don",
+          "zip_code": 65000,
+          "lat": 16.911,
+          "long": 100.158
+        },
+        {
+          "id": 650120,
+          "name_th": "งิ้วงาม",
+          "name_en": "Ngio Ngam",
+          "zip_code": 65230,
+          "lat": 16.671,
+          "long": 100.237
+        }
+      ]
+    },
+    {
+      "id": 6502,
+      "name_th": "นครไทย",
+      "name_en": "Nakhon Thai",
+      "sub_districts": [
+        {
+          "id": 650201,
+          "name_th": "นครไทย",
+          "name_en": "Nakhon Thai",
+          "zip_code": 65120,
+          "lat": 17.126,
+          "long": 100.839
+        },
+        {
+          "id": 650202,
+          "name_th": "หนองกะท้าว",
+          "name_en": "Nong Kathao",
+          "zip_code": 65120,
+          "lat": 17.096,
+          "long": 100.674
+        },
+        {
+          "id": 650203,
+          "name_th": "บ้านแยง",
+          "name_en": "Ban Yaeng",
+          "zip_code": 65120,
+          "lat": 16.942,
+          "long": 100.71
+        },
+        {
+          "id": 650204,
+          "name_th": "เนินเพิ่ม",
+          "name_en": "Noen Phoem",
+          "zip_code": 65120,
+          "lat": 17.033,
+          "long": 100.946
+        },
+        {
+          "id": 650205,
+          "name_th": "นาบัว",
+          "name_en": "Na Bua",
+          "zip_code": 65120,
+          "lat": 17.203,
+          "long": 100.851
+        },
+        {
+          "id": 650206,
+          "name_th": "นครชุม",
+          "name_en": "Nakhon Chum",
+          "zip_code": 65120,
+          "lat": 17.26,
+          "long": 100.806
+        },
+        {
+          "id": 650207,
+          "name_th": "น้ำกุ่ม",
+          "name_en": "Nam Kum",
+          "zip_code": 65120,
+          "lat": 17.398,
+          "long": 100.866
+        },
+        {
+          "id": 650208,
+          "name_th": "ยางโกลน",
+          "name_en": "Yang Klon",
+          "zip_code": 65120,
+          "lat": 17.207,
+          "long": 100.95
+        },
+        {
+          "id": 650209,
+          "name_th": "บ่อโพธิ์",
+          "name_en": "Bo Pho",
+          "zip_code": 65120,
+          "lat": 17.161,
+          "long": 101.017
+        },
+        {
+          "id": 650210,
+          "name_th": "บ้านพร้าว",
+          "name_en": "Ban Phrao",
+          "zip_code": 65120,
+          "lat": 17.146,
+          "long": 100.76
+        },
+        {
+          "id": 650211,
+          "name_th": "ห้วยเฮี้ย",
+          "name_en": "Huai Hia",
+          "zip_code": 65120,
+          "lat": 16.899,
+          "long": 100.923
+        }
+      ]
+    },
+    {
+      "id": 6503,
+      "name_th": "ชาติตระการ",
+      "name_en": "Chat Trakan",
+      "sub_districts": [
+        {
+          "id": 650301,
+          "name_th": "ป่าแดง",
+          "name_en": "Pa Daeng",
+          "zip_code": 65170,
+          "lat": 17.285,
+          "long": 100.561
+        },
+        {
+          "id": 650302,
+          "name_th": "ชาติตระการ",
+          "name_en": "Chat Trakan",
+          "zip_code": 65170,
+          "lat": 17.32,
+          "long": 100.704
+        },
+        {
+          "id": 650303,
+          "name_th": "สวนเมี่ยง",
+          "name_en": "Suan Miang",
+          "zip_code": 65170,
+          "lat": 17.194,
+          "long": 100.529
+        },
+        {
+          "id": 650304,
+          "name_th": "บ้านดง",
+          "name_en": "Ban Dong",
+          "zip_code": 65170,
+          "lat": 17.361,
+          "long": 100.505
+        },
+        {
+          "id": 650305,
+          "name_th": "บ่อภาค",
+          "name_en": "Bo Phak",
+          "zip_code": 65170,
+          "lat": 17.54,
+          "long": 100.817
+        },
+        {
+          "id": 650306,
+          "name_th": "ท่าสะแก",
+          "name_en": "Tha Sakae",
+          "zip_code": 65170,
+          "lat": 17.241,
+          "long": 100.711
+        }
+      ]
+    },
+    {
+      "id": 6504,
+      "name_th": "บางระกำ",
+      "name_en": "Bang Rakam",
+      "sub_districts": [
+        {
+          "id": 650401,
+          "name_th": "บางระกำ",
+          "name_en": "Bang Rakam",
+          "zip_code": 65140,
+          "lat": 16.738,
+          "long": 100.145
+        },
+        {
+          "id": 650402,
+          "name_th": "ปลักแรด",
+          "name_en": "Plak Raet",
+          "zip_code": 65140,
+          "lat": 16.693,
+          "long": 100.094
+        },
+        {
+          "id": 650403,
+          "name_th": "พันเสา",
+          "name_en": "Phan Sao",
+          "zip_code": 65140,
+          "lat": 16.622,
+          "long": 100.064
+        },
+        {
+          "id": 650404,
+          "name_th": "วังอิทก",
+          "name_en": "Wang Ithok",
+          "zip_code": 65140,
+          "lat": 16.665,
+          "long": 100.164
+        },
+        {
+          "id": 650405,
+          "name_th": "บึงกอก",
+          "name_en": "Bueng Kok",
+          "zip_code": 65140,
+          "lat": 16.7,
+          "long": 100.011
+        },
+        {
+          "id": 650406,
+          "name_th": "หนองกุลา",
+          "name_en": "Nong Kula",
+          "zip_code": 65140,
+          "lat": 16.636,
+          "long": 99.96
+        },
+        {
+          "id": 650407,
+          "name_th": "ชุมแสงสงคราม",
+          "name_en": "Chum Saeng Songkhram",
+          "zip_code": 65240,
+          "lat": 16.76,
+          "long": 99.977
+        },
+        {
+          "id": 650408,
+          "name_th": "นิคมพัฒนา",
+          "name_en": "Nikhom Phatthana",
+          "zip_code": 65140,
+          "lat": 16.741,
+          "long": 99.885
+        },
+        {
+          "id": 650409,
+          "name_th": "บ่อทอง",
+          "name_en": "Bo Thong",
+          "zip_code": 65140,
+          "lat": 16.631,
+          "long": 100.134
+        },
+        {
+          "id": 650410,
+          "name_th": "ท่านางงาม",
+          "name_en": "Tha Nang Ngam",
+          "zip_code": 65140,
+          "lat": 16.81,
+          "long": 100.114
+        },
+        {
+          "id": 650411,
+          "name_th": "คุยม่วง",
+          "name_en": "Khui Muang",
+          "zip_code": 65240,
+          "lat": 16.82,
+          "long": 99.962
+        }
+      ]
+    },
+    {
+      "id": 6505,
+      "name_th": "บางกระทุ่ม",
+      "name_en": "Bang Krathum",
+      "sub_districts": [
+        {
+          "id": 650501,
+          "name_th": "บางกระทุ่ม",
+          "name_en": "Bang Krathum",
+          "zip_code": 65110,
+          "lat": 16.591,
+          "long": 100.297
+        },
+        {
+          "id": 650502,
+          "name_th": "บ้านไร่",
+          "name_en": "Ban Rai",
+          "zip_code": 65110,
+          "lat": 16.62,
+          "long": 100.253
+        },
+        {
+          "id": 650503,
+          "name_th": "โคกสลุด",
+          "name_en": "Khok Salut",
+          "zip_code": 65110,
+          "lat": 16.577,
+          "long": 100.245
+        },
+        {
+          "id": 650504,
+          "name_th": "สนามคลี",
+          "name_en": "Sanam Khli",
+          "zip_code": 65110,
+          "lat": 16.547,
+          "long": 100.256
+        },
+        {
+          "id": 650505,
+          "name_th": "ท่าตาล",
+          "name_en": "Tha Tan",
+          "zip_code": 65110,
+          "lat": 16.658,
+          "long": 100.331
+        },
+        {
+          "id": 650506,
+          "name_th": "ไผ่ล้อม",
+          "name_en": "Phai Lom",
+          "zip_code": 65110,
+          "lat": 16.56,
+          "long": 100.347
+        },
+        {
+          "id": 650507,
+          "name_th": "นครป่าหมาก",
+          "name_en": "Nakhon Pa Mak",
+          "zip_code": 65110,
+          "lat": 16.609,
+          "long": 100.351
+        },
+        {
+          "id": 650508,
+          "name_th": "เนินกุ่ม",
+          "name_en": "Noen Kum",
+          "zip_code": 65210,
+          "lat": 16.541,
+          "long": 100.458
+        },
+        {
+          "id": 650509,
+          "name_th": "วัดตายม",
+          "name_en": "Wat Ta Yom",
+          "zip_code": 65210,
+          "lat": 16.595,
+          "long": 100.444
+        }
+      ]
+    },
+    {
+      "id": 6506,
+      "name_th": "พรหมพิราม",
+      "name_en": "Phrom Phiram",
+      "sub_districts": [
+        {
+          "id": 650601,
+          "name_th": "พรหมพิราม",
+          "name_en": "Phrom Phiram",
+          "zip_code": 65150,
+          "lat": 17.004,
+          "long": 100.135
+        },
+        {
+          "id": 650602,
+          "name_th": "ท่าช้าง",
+          "name_en": "Tha Chang",
+          "zip_code": 65150,
+          "lat": 16.976,
+          "long": 100.168
+        },
+        {
+          "id": 650603,
+          "name_th": "วงฆ้อง",
+          "name_en": "Wong Khong",
+          "zip_code": 65180,
+          "lat": 17.113,
+          "long": 100.107
+        },
+        {
+          "id": 650604,
+          "name_th": "มะตูม",
+          "name_en": "Matum",
+          "zip_code": 65150,
+          "lat": 16.936,
+          "long": 100.205
+        },
+        {
+          "id": 650605,
+          "name_th": "หอกลอง",
+          "name_en": "Ho Klong",
+          "zip_code": 65150,
+          "lat": 16.985,
+          "long": 100.251
+        },
+        {
+          "id": 650606,
+          "name_th": "ศรีภิรมย์",
+          "name_en": "Si Phirom",
+          "zip_code": 65180,
+          "lat": 17.094,
+          "long": 100.029
+        },
+        {
+          "id": 650607,
+          "name_th": "ตลุกเทียม",
+          "name_en": "Taluk Thiam",
+          "zip_code": 65180,
+          "lat": 17.149,
+          "long": 100.039
+        },
+        {
+          "id": 650608,
+          "name_th": "วังวน",
+          "name_en": "Wang Won",
+          "zip_code": 65150,
+          "lat": 17.05,
+          "long": 100.029
+        },
+        {
+          "id": 650609,
+          "name_th": "หนองแขม",
+          "name_en": "Nong Khaem",
+          "zip_code": 65150,
+          "lat": 17.046,
+          "long": 100.131
+        },
+        {
+          "id": 650610,
+          "name_th": "มะต้อง",
+          "name_en": "Matong",
+          "zip_code": 65180,
+          "lat": 17.086,
+          "long": 100.166
+        },
+        {
+          "id": 650611,
+          "name_th": "ทับยายเชียง",
+          "name_en": "Thap Yai Chiang",
+          "zip_code": 65150,
+          "lat": 17.095,
+          "long": 100.294
+        },
+        {
+          "id": 650612,
+          "name_th": "ดงประคำ",
+          "name_en": "Dong Prakham",
+          "zip_code": 65180,
+          "lat": 17.189,
+          "long": 100.26
+        }
+      ]
+    },
+    {
+      "id": 6507,
+      "name_th": "วัดโบสถ์",
+      "name_en": "Wat Bot",
+      "sub_districts": [
+        {
+          "id": 650701,
+          "name_th": "วัดโบสถ์",
+          "name_en": "Wat Bot",
+          "zip_code": 65160,
+          "lat": 17.021,
+          "long": 100.306
+        },
+        {
+          "id": 650702,
+          "name_th": "ท่างาม",
+          "name_en": "Tha Ngam",
+          "zip_code": 65160,
+          "lat": 16.97,
+          "long": 100.377
+        },
+        {
+          "id": 650703,
+          "name_th": "ท้อแท้",
+          "name_en": "Thothae",
+          "zip_code": 65160,
+          "lat": 16.968,
+          "long": 100.296
+        },
+        {
+          "id": 650704,
+          "name_th": "บ้านยาง",
+          "name_en": "Ban Yang",
+          "zip_code": 65160,
+          "lat": 17.089,
+          "long": 100.413
+        },
+        {
+          "id": 650705,
+          "name_th": "หินลาด",
+          "name_en": "Hin Lat",
+          "zip_code": 65160,
+          "lat": 17.168,
+          "long": 100.333
+        },
+        {
+          "id": 650706,
+          "name_th": "คันโช้ง",
+          "name_en": "Khan Chong",
+          "zip_code": 65160,
+          "lat": 17.307,
+          "long": 100.298
+        }
+      ]
+    },
+    {
+      "id": 6508,
+      "name_th": "วังทอง",
+      "name_en": "Wang Thong",
+      "sub_districts": [
+        {
+          "id": 650801,
+          "name_th": "วังทอง",
+          "name_en": "Wang Thong",
+          "zip_code": 65130,
+          "lat": 16.822,
+          "long": 100.403
+        },
+        {
+          "id": 650802,
+          "name_th": "พันชาลี",
+          "name_en": "Phan Chali",
+          "zip_code": 65130,
+          "lat": 16.608,
+          "long": 100.523
+        },
+        {
+          "id": 650803,
+          "name_th": "แม่ระกา",
+          "name_en": "Mae Raka",
+          "zip_code": 65130,
+          "lat": 16.707,
+          "long": 100.362
+        },
+        {
+          "id": 650804,
+          "name_th": "บ้านกลาง",
+          "name_en": "Ban Klang",
+          "zip_code": 65220,
+          "lat": 17.017,
+          "long": 100.549
+        },
+        {
+          "id": 650805,
+          "name_th": "วังพิกุล",
+          "name_en": "Wang Phikun",
+          "zip_code": 65130,
+          "lat": 16.775,
+          "long": 100.358
+        },
+        {
+          "id": 650806,
+          "name_th": "แก่งโสภา",
+          "name_en": "Kaeng Sopha",
+          "zip_code": 65220,
+          "lat": 16.907,
+          "long": 100.625
+        },
+        {
+          "id": 650807,
+          "name_th": "ท่าหมื่นราม",
+          "name_en": "Tha Muen Ram",
+          "zip_code": 65130,
+          "lat": 16.691,
+          "long": 100.514
+        },
+        {
+          "id": 650808,
+          "name_th": "วังนกแอ่น",
+          "name_en": "Wang Nok Aen",
+          "zip_code": 65130,
+          "lat": 16.819,
+          "long": 100.582
+        },
+        {
+          "id": 650809,
+          "name_th": "หนองพระ",
+          "name_en": "Nong Phra",
+          "zip_code": 65130,
+          "lat": 16.681,
+          "long": 100.441
+        },
+        {
+          "id": 650810,
+          "name_th": "ชัยนาม",
+          "name_en": "Chaiyanam",
+          "zip_code": 65130,
+          "lat": 16.839,
+          "long": 100.467
+        },
+        {
+          "id": 650811,
+          "name_th": "ดินทอง",
+          "name_en": "Din Thong",
+          "zip_code": 65130,
+          "lat": 16.767,
+          "long": 100.445
+        }
+      ]
+    },
+    {
+      "id": 6509,
+      "name_th": "เนินมะปราง",
+      "name_en": "Noen Maprang",
+      "sub_districts": [
+        {
+          "id": 650901,
+          "name_th": "ชมพู",
+          "name_en": "Chomphu",
+          "zip_code": 65190,
+          "lat": 16.717,
+          "long": 100.641
+        },
+        {
+          "id": 650902,
+          "name_th": "บ้านมุง",
+          "name_en": "Ban Mung",
+          "zip_code": 65190,
+          "lat": 16.543,
+          "long": 100.752
+        },
+        {
+          "id": 650903,
+          "name_th": "ไทรย้อย",
+          "name_en": "Sai Yoi",
+          "zip_code": 65190,
+          "lat": 16.452,
+          "long": 100.634
+        },
+        {
+          "id": 650904,
+          "name_th": "วังโพรง",
+          "name_en": "Wang Phrong",
+          "zip_code": 65190,
+          "lat": 16.383,
+          "long": 100.664
+        },
+        {
+          "id": 650905,
+          "name_th": "บ้านน้อยซุ้มขี้เหล็ก",
+          "name_en": "Ban Noi Sum Khilek",
+          "zip_code": 65190,
+          "lat": 16.542,
+          "long": 100.596
+        },
+        {
+          "id": 650906,
+          "name_th": "เนินมะปราง",
+          "name_en": "Noen Maprang",
+          "zip_code": 65190,
+          "lat": 16.595,
+          "long": 100.626
+        },
+        {
+          "id": 650907,
+          "name_th": "วังยาง",
+          "name_en": "Wang Yang",
+          "zip_code": 65190,
+          "lat": 16.457,
+          "long": 100.741
+        },
+        {
+          "id": 650908,
+          "name_th": "โคกแหลม",
+          "name_en": "Khok Laem",
+          "zip_code": 65190,
+          "lat": null,
+          "long": null
+        }
+      ]
+    }
+  ]
+}
